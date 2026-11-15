@@ -15,10 +15,10 @@ app.listen(PORT, () => {
 const token = process.env.BOT_TOKEN;
 const bot = new TelegramBot(token, { polling: true });
 const ADMIN_ID = process.env.ADMIN_ID || 6022935003;
-const CHANNEL_ID = process.env.CHANNEL_ID || "@XEROXTGSTORE";
-const CHANNEL_LINK = process.env.CHANNEL_LINK || "https://t.me/+SERLEJ1Wc24zMmE9";
+const CHANNEL_ID = process.env.CHANNEL_ID || "@XEROXTGSTOCK";
+const CHANNEL_LINK = process.env.CHANNEL_LINK || "https://t.me/XEROXTGSTOCK";
 const REQUIRED_CHATS = [
-  { id: CHANNEL_ID, link: CHANNEL_LINK, name: "XEROXTGSTORE" },
+  { id: CHANNEL_ID, link: CHANNEL_LINK, name: "XEROXTGSTOCK" },
 ];
 // ─── AUTO-REGISTER COMMAND MENU ──────────────────────────────────────────────
 bot.setMyCommands([
