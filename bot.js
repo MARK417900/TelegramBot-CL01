@@ -14,11 +14,11 @@ app.listen(PORT, () => {
 });
 const token = process.env.BOT_TOKEN;
 const bot = new TelegramBot(token, { polling: true });
-const ADMIN_ID = process.env.ADMIN_ID || 8521844327;
-const CHANNEL_ID = process.env.CHANNEL_ID || "@EarnWithMark41";
-const CHANNEL_LINK = process.env.CHANNEL_LINK || "https://t.me/EarnWithMark41";
+const ADMIN_ID = process.env.ADMIN_ID || 6022935003;
+const CHANNEL_ID = process.env.CHANNEL_ID || "@PAPUxSTORE";
+const CHANNEL_LINK = process.env.CHANNEL_LINK || "https://t.me/PAPUxSTORE";
 const REQUIRED_CHATS = [
-  { id: CHANNEL_ID, link: CHANNEL_LINK, name: "EarnWithMark41" },
+  { id: CHANNEL_ID, link: CHANNEL_LINK, name: "PAPUxSTORE" },
 ];
 // ─── AUTO-REGISTER COMMAND MENU ──────────────────────────────────────────────
 bot.setMyCommands([
@@ -548,7 +548,7 @@ bot.onText(/\/start(.*)/, async (msg, match) => {
   if (!(await passesGate(chatId))) return;
 
   send(chatId,
-    `Welcome in PAPUxSTORE, ${msg.from.first_name}`,
+    `Welcome in STORE Dear, ${msg.from.first_name}`,
     mainMenu());
 });
 // ─────────────────────────────────────────────────────────────────────────────
@@ -1004,7 +1004,7 @@ bot.on("message", async msg => {
     send(chatId,
       `🤝 Refer & Earn\n\n` +
       `Your Referral Link:\n` +
-      `https://t.me/XEROXTGX_BOT?start=${chatId}\n\n` +
+      `https://t.me/XEROXTGX_Bot?start=${chatId}\n\n` +
       `🎁 Get 1 FREE WhatsApp/Telegram account for every ${REFERRALS_FOR_FREE} valid referrals.\n` +
       `A referral is valid when your friend buys at least one account.\n\n` +
       `✅ Valid referrals: ${count}\n` +
