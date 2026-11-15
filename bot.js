@@ -35,8 +35,8 @@ const ACCOUNT_TYPES = {
 };
 const ACCOUNT_MAX_QTY = 10;
 const ADD_STOCK_MAX_QTY = 500; // max per country in one add
-const PAYMENT_QR = "https://raw.githubusercontent.com/MARK417900/telegram-invite-bot/main/PaymentQR.jpg";
-const UPI_ID = "7891624054@mbk";
+const PAYMENT_QR = "https://raw.githubusercontent.com/MARK417900/TelegramBot-CL01/main/PaymentQR.jpg";
+const UPI_ID = "nxmodz08sumitraowner@yesfam";
 
 // ─── DEPOSIT CONFIG ───────────────────────────────────────────────────────────
 const MIN_DEPOSIT = 10;
@@ -1004,7 +1004,7 @@ bot.on("message", async msg => {
     send(chatId,
       `🤝 Refer & Earn\n\n` +
       `Your Referral Link:\n` +
-      `https://t.me/PapuStore_Bot?start=${chatId}\n\n` +
+      `https://t.me/XEROXTGX_BOT?start=${chatId}\n\n` +
       `🎁 Get 1 FREE WhatsApp/Telegram account for every ${REFERRALS_FOR_FREE} valid referrals.\n` +
       `A referral is valid when your friend buys at least one account.\n\n` +
       `✅ Valid referrals: ${count}\n` +
