@@ -565,11 +565,10 @@ bot.onText(/\/start(.*)/, async (msg, match) => {
 // ─────────────────────────────────────────────────────────────────────────────
 const BUILDER_USERNAME = "MARK41_001";
 const BUILDER_INFO =
-  `🤖 Bot Builder Info\n\n` +
-  `📢 Community: "https://t.me/+pNRg_oJqSaFlZWE1"\n` +
+  `🤖 Bot Builder Info\n` +
   `👨‍💻 Developer: @${BUILDER_USERNAME}\n\n` +
   `━━━━━━━━━━━━━━━━\n` +
-  `✨ If you want to create your own bot, contact @${BUILDER_USERNAME}`;
+  `✨ If you want to create your own bot, contact atleast once`;
 
 // case-insensitive: /Builder, /builder, /BUILDER, /builder@PapuStore_Bot
 bot.onText(/^\/builder(?:@\w+)?\s*$/i, (msg) => {
@@ -577,7 +576,7 @@ bot.onText(/^\/builder(?:@\w+)?\s*$/i, (msg) => {
     reply_markup: {
       inline_keyboard: [
         [{ text: "👨‍💻 Contact Developer", url: `https://t.me/${BUILDER_USERNAME}` }],
-        [{ text: "📢 Our Channel", url: `https://t.me/+pNRg_oJqSaFlZWE1` }],
+        [{ text: "📢 Our Community", url: `https://t.me/+pNRg_oJqSaFlZWE1` }],
       ],
     },
   });
