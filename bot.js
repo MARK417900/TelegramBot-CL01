@@ -2,7 +2,7 @@ const express = require("express");
 const TelegramBot = require("node-telegram-bot-api");
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 10000;
 
 /* SERVER */
 app.get("/", (req, res) => {
