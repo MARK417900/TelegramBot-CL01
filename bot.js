@@ -2,7 +2,7 @@ const express = require("express");
 const TelegramBot = require("node-telegram-bot-api");
 
 const app = express();
-const PORT = process.env.PORT || 10000;
+const PORT = process.env.PORT || 3000;
 
 /* SERVER */
 app.get("/", (req, res) => {
@@ -14,17 +14,30 @@ app.listen(PORT, () => {
 });
 const token = process.env.BOT_TOKEN;
 const bot = new TelegramBot(token, { polling: true });
-const ADMIN_ID = process.env.ADMIN_ID || 8521844327;
+const ADMIN_ID = 8751167278;
 
-// ─── AUTO-REGISTER COMMAND MENU ──────────────────────────────────────────────
-bot.setMyCommands([
-  { command: "start", description: "Start the bot" },
-  { command: "builder", description: "Create your own bot" },
-]).then(() => console.log("✅ Bot commands registered"))
-  .catch(err => console.error("setMyCommands failed:", err.message));
+// ─── REQUIRED CHANNEL (users must join before ANYTHING works) ────────────────
+// ⚠️ Set these two (env vars on your host, or edit the fallback values):
+//   CHANNEL_ID   → "@YourChannelUsername" (public) or "-100xxxxxxxxxx" (private)
+//   CHANNEL_LINK → invite link of the "PAPUxSTORE" channel
+// The bot MUST be an admin in that channel, otherwise it cannot check membership.
+const CHANNEL_ID = process.env.CHANNEL_ID || "@PAPUxSTORE";
+const CHANNEL_LINK = process.env.CHANNEL_LINK || "https://t.me/PAPUxSTORE";
+// Add more entries here later if you want to force-join more chats (e.g. your old group).
+const REQUIRED_CHATS = [
+  { id: CHANNEL_ID, link: CHANNEL_LINK, name: "PAPUxSTORE" },
+];
 
+// ─── REFERRAL CONFIG ──────────────────────────────────────────────────────────
+// A referral is "valid" when the referred person's first account order is marked ✅ Done by admin.
 const REFERRALS_FOR_FREE = 5; // every 5 valid referrals = 1 free WhatsApp/Telegram account
+
+// What happens when admin cancels an order that was paid for?
+// false = just close it (settle refund manually in chat). true = credit price to user's bot balance.
 const REFUND_ON_CANCEL = false;
+
+// ─── BUY ACCOUNT CONFIG ────────────────────────────────────────────────────
+// Each account type has its own label and price (₹ per account). Change freely.
 const ACCOUNT_TYPES = {
   whatsapp: { label: "📱 WhatsApp", price: 40 },
   telegram: { label: "✈️ Telegram", price: 40 },
@@ -547,6 +560,7 @@ bot.onText(/\/start(.*)/, async (msg, match) => {
     `Welcome in Store, ${msg.from.first_name}`,
     mainMenu());
 });
+
 // ─────────────────────────────────────────────────────────────────────────────
 //  /Builder  (public: works for everyone, no channel gate)
 // ─────────────────────────────────────────────────────────────────────────────
@@ -1016,8 +1030,8 @@ bot.on("message", async msg => {
     send(chatId, "🆘 Support\nChoose an option:", {
       reply_markup: {
         inline_keyboard: [
-          [{ text: "✉️ Contact Admin (in bot)", callback_data: "msg_admin_start" }],
-          [{ text: "📞 Contact Developer", url: "https://t.me/Mark41_001" }],
+          [{ text: "✉️ Message Admin (in bot)", callback_data: "msg_admin_start" }],
+          [{ text: "📞 Contact Developer", url: "https://t.me/MARK41_001" }],
         ]
       },
     });
@@ -1589,6 +1603,7 @@ bot.on("photo", async msg => {
   }
 
 });
+
 // ─── ERROR HANDLING ───────────────────────────────────────────────────────────
 process.on("unhandledRejection", r => console.error("Unhandled rejection:", r));
 process.on("uncaughtException", e => console.error("Uncaught exception:", e.message));
