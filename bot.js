@@ -15,11 +15,7 @@ app.listen(PORT, () => {
 const token = process.env.BOT_TOKEN;
 const bot = new TelegramBot(token, { polling: true });
 const ADMIN_ID = process.env.ADMIN_ID || 8521844327;
-const CHANNEL_ID = process.env.CHANNEL_ID || "@EarnWithMark41";
-const CHANNEL_LINK = process.env.CHANNEL_LINK || "https://t.me/EarnWithMark41";
-const REQUIRED_CHATS = [
-  { id: CHANNEL_ID, link: CHANNEL_LINK, name: "EarnWithMark41" },
-];
+
 // ─── AUTO-REGISTER COMMAND MENU ──────────────────────────────────────────────
 bot.setMyCommands([
   { command: "start", description: "Start the bot" },
@@ -548,7 +544,7 @@ bot.onText(/\/start(.*)/, async (msg, match) => {
   if (!(await passesGate(chatId))) return;
 
   send(chatId,
-    `Welcome in PAPUxSTORE, ${msg.from.first_name}`,
+    `Welcome in Store, ${msg.from.first_name}`,
     mainMenu());
 });
 // ─────────────────────────────────────────────────────────────────────────────
