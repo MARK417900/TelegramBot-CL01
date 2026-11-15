@@ -1062,7 +1062,7 @@ bot.on("callback_query", async query => {
     const missing = await missingChats(chatId);
     if (!missing.length) {
       bot.deleteMessage(chatId, msgId).catch(() => { });
-      send(chatId, `🎲 Welcome in Marks Community !!`, mainMenu());
+      send(chatId, `🎲 Welcome in STORE !!!`, mainMenu());
     } else {
       bot.deleteMessage(chatId, msgId).catch(() => { });
       sendJoinPrompt(chatId, missing, "❌ You haven't joined yet!\n\n");
