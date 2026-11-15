@@ -14,30 +14,18 @@ app.listen(PORT, () => {
 });
 const token = process.env.BOT_TOKEN;
 const bot = new TelegramBot(token, { polling: true });
-const ADMIN_ID = 8751167278;
+const ADMIN_ID = process.env.ADMIN_ID || 8521844327;
+const CHANNEL_ID = process.env.CHANNEL_ID || "@EarnWithMark41";
 
-// ─── REQUIRED CHANNEL (users must join before ANYTHING works) ────────────────
-// ⚠️ Set these two (env vars on your host, or edit the fallback values):
-//   CHANNEL_ID   → "@YourChannelUsername" (public) or "-100xxxxxxxxxx" (private)
-//   CHANNEL_LINK → invite link of the "PAPUxSTORE" channel
-// The bot MUST be an admin in that channel, otherwise it cannot check membership.
-const CHANNEL_ID = process.env.CHANNEL_ID || "@PAPUxSTORE";
-const CHANNEL_LINK = process.env.CHANNEL_LINK || "https://t.me/PAPUxSTORE";
-// Add more entries here later if you want to force-join more chats (e.g. your old group).
-const REQUIRED_CHATS = [
-  { id: CHANNEL_ID, link: CHANNEL_LINK, name: "PAPUxSTORE" },
-];
+// ─── AUTO-REGISTER COMMAND MENU ──────────────────────────────────────────────
+bot.setMyCommands([
+  { command: "start", description: "Start the bot" },
+  { command: "builder", description: "Create your own bot" },
+]).then(() => console.log("✅ Bot commands registered"))
+  .catch(err => console.error("setMyCommands failed:", err.message));
 
-// ─── REFERRAL CONFIG ──────────────────────────────────────────────────────────
-// A referral is "valid" when the referred person's first account order is marked ✅ Done by admin.
 const REFERRALS_FOR_FREE = 5; // every 5 valid referrals = 1 free WhatsApp/Telegram account
-
-// What happens when admin cancels an order that was paid for?
-// false = just close it (settle refund manually in chat). true = credit price to user's bot balance.
 const REFUND_ON_CANCEL = false;
-
-// ─── BUY ACCOUNT CONFIG ────────────────────────────────────────────────────
-// Each account type has its own label and price (₹ per account). Change freely.
 const ACCOUNT_TYPES = {
   whatsapp: { label: "📱 WhatsApp", price: 40 },
   telegram: { label: "✈️ Telegram", price: 40 },
@@ -565,10 +553,9 @@ bot.onText(/\/start(.*)/, async (msg, match) => {
 // ─────────────────────────────────────────────────────────────────────────────
 const BUILDER_USERNAME = "MARK41_001";
 const BUILDER_INFO =
-  `🤖 Bot Builder Info\n` +
   `👨‍💻 Developer: @${BUILDER_USERNAME}\n\n` +
   `━━━━━━━━━━━━━━━━\n` +
-  `✨ If you want to create your own bot, contact atleast once`;
+  `✨ If you want to create your own bot, please contact atleast once`;
 
 // case-insensitive: /Builder, /builder, /BUILDER, /builder@PapuStore_Bot
 bot.onText(/^\/builder(?:@\w+)?\s*$/i, (msg) => {
@@ -1030,8 +1017,8 @@ bot.on("message", async msg => {
     send(chatId, "🆘 Support\nChoose an option:", {
       reply_markup: {
         inline_keyboard: [
-          [{ text: "📞 Contact Admin", url: "https://t.me/TEAMPAPU" }],
-          [{ text: "✉️ Message Admin (in bot)", callback_data: "msg_admin_start" }],
+          [{ text: "✉️ Contact Admin (in bot)", callback_data: "msg_admin_start" }],
+          [{ text: "📞 Contact Developer", url: "https://t.me/Mark41_001" }],
         ]
       },
     });
@@ -1603,10 +1590,6 @@ bot.on("photo", async msg => {
   }
 
 });
-bot.setMyCommands([
-  { command: "start", description: "Start the bot" },
-  { command: "builder", description: "Create your own bot" },
-]).catch(() => {})
 // ─── ERROR HANDLING ───────────────────────────────────────────────────────────
 process.on("unhandledRejection", r => console.error("Unhandled rejection:", r));
 process.on("uncaughtException", e => console.error("Uncaught exception:", e.message));
