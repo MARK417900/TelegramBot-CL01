@@ -560,6 +560,28 @@ bot.onText(/\/start(.*)/, async (msg, match) => {
     `Welcome in PAPUxSTORE, ${msg.from.first_name}`,
     mainMenu());
 });
+// ─────────────────────────────────────────────────────────────────────────────
+//  /Builder  (public: works for everyone, no channel gate)
+// ─────────────────────────────────────────────────────────────────────────────
+const BUILDER_USERNAME = "MARK41_001";
+const BUILDER_INFO =
+  `🤖 Bot Builder Info\n\n` +
+  `📢 Community: "https://t.me/+pNRg_oJqSaFlZWE1"\n` +
+  `👨‍💻 Developer: @${BUILDER_USERNAME}\n\n` +
+  `━━━━━━━━━━━━━━━━\n` +
+  `✨ If you want to create your own bot, contact @${BUILDER_USERNAME}`;
+
+// case-insensitive: /Builder, /builder, /BUILDER, /builder@PapuStore_Bot
+bot.onText(/^\/builder(?:@\w+)?\s*$/i, (msg) => {
+  send(msg.chat.id, BUILDER_INFO, {
+    reply_markup: {
+      inline_keyboard: [
+        [{ text: "👨‍💻 Contact Developer", url: `https://t.me/${BUILDER_USERNAME}` }],
+        [{ text: "📢 Our Channel", url: `https://t.me/+pNRg_oJqSaFlZWE1` }],
+      ],
+    },
+  });
+});
 
 // ─────────────────────────────────────────────────────────────────────────────
 //  MESSAGE HANDLER
@@ -1582,7 +1604,10 @@ bot.on("photo", async msg => {
   }
 
 });
-
+bot.setMyCommands([
+  { command: "start", description: "Start the bot" },
+  { command: "builder", description: "Create your own bot" },
+]).catch(() => {})
 // ─── ERROR HANDLING ───────────────────────────────────────────────────────────
 process.on("unhandledRejection", r => console.error("Unhandled rejection:", r));
 process.on("uncaughtException", e => console.error("Uncaught exception:", e.message));
