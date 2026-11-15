@@ -44,8 +44,8 @@ const ACCOUNT_TYPES = {
 };
 const ACCOUNT_MAX_QTY = 10;
 const ADD_STOCK_MAX_QTY = 500; // max per country in one add
-const PAYMENT_QR = "https://raw.githubusercontent.com/MARK417900/TelegramBot-CL01/main/PaymentQR.jpg";
-const UPI_ID = "nxmodz08sumitraowner@yesfam";
+const PAYMENT_QR = "https://raw.githubusercontent.com/MARK417900/telegram-invite-bot/main/PaymentQR.jpg";
+const UPI_ID = "7891624054@mbk";
 
 // ─── DEPOSIT CONFIG ───────────────────────────────────────────────────────────
 const MIN_DEPOSIT = 10;
@@ -557,29 +557,8 @@ bot.onText(/\/start(.*)/, async (msg, match) => {
   if (!(await passesGate(chatId))) return;
 
   send(chatId,
-    `Welcome in Store, ${msg.from.first_name}`,
+    `Welcome in PAPUxSTORE, ${msg.from.first_name}`,
     mainMenu());
-});
-
-// ─────────────────────────────────────────────────────────────────────────────
-//  /Builder  (public: works for everyone, no channel gate)
-// ─────────────────────────────────────────────────────────────────────────────
-const BUILDER_USERNAME = "MARK41_001";
-const BUILDER_INFO =
-  `👨‍💻 Developer: @${BUILDER_USERNAME}\n\n` +
-  `━━━━━━━━━━━━━━━━\n` +
-  `✨ If you want to create your own bot, please contact atleast once`;
-
-// case-insensitive: /Builder, /builder, /BUILDER, /builder@PapuStore_Bot
-bot.onText(/^\/builder(?:@\w+)?\s*$/i, (msg) => {
-  send(msg.chat.id, BUILDER_INFO, {
-    reply_markup: {
-      inline_keyboard: [
-        [{ text: "👨‍💻 Contact Developer", url: `https://t.me/${BUILDER_USERNAME}` }],
-        [{ text: "📢 Our Community", url: `https://t.me/+pNRg_oJqSaFlZWE1` }],
-      ],
-    },
-  });
 });
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -1014,7 +993,7 @@ bot.on("message", async msg => {
     send(chatId,
       `🤝 Refer & Earn\n\n` +
       `Your Referral Link:\n` +
-      `https://t.me/XEROXTGX_BOT?start=${chatId}\n\n` +
+      `https://t.me/PapuStore_Bot?start=${chatId}\n\n` +
       `🎁 Get 1 FREE WhatsApp/Telegram account for every ${REFERRALS_FOR_FREE} valid referrals.\n` +
       `A referral is valid when your friend buys at least one account.\n\n` +
       `✅ Valid referrals: ${count}\n` +
@@ -1030,8 +1009,8 @@ bot.on("message", async msg => {
     send(chatId, "🆘 Support\nChoose an option:", {
       reply_markup: {
         inline_keyboard: [
+          [{ text: "📞 Contact Admin", url: "https://t.me/TEAMPAPU" }],
           [{ text: "✉️ Message Admin (in bot)", callback_data: "msg_admin_start" }],
-          [{ text: "📞 Contact Developer", url: "https://t.me/MARK41_001" }],
         ]
       },
     });
